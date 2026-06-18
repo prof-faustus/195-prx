@@ -1,0 +1,1 @@
+{"_meta": {"gpu": 2, "done": true}, "0.20": {"coh_sum": 66.04138076840715, "coh_sumsq": 30.35345227630312, "coh_n": 1500, "pauli_fails": 375, "pauli_n": 30000}}

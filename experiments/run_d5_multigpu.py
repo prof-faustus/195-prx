@@ -17,7 +17,6 @@ import os, sys, json, csv, math, time, argparse, subprocess
 
 HERE = os.path.dirname(__file__)
 RESULTS = os.path.join(HERE, "..", "results")
-THETAS = [0.20, 0.30, 0.40, 0.50]
 
 
 def split(total, parts, i):
@@ -30,19 +29,24 @@ def main():
     ap.add_argument("--coh-shots", type=int, default=300)       # total coherent shots / theta
     ap.add_argument("--pauli-shots", type=int, default=120000)  # total pauli shots / theta
     ap.add_argument("--max-sec", type=float, default=240.0)
+    ap.add_argument("--thetas", type=float, nargs="+", default=[0.20, 0.30, 0.40, 0.50])
+    ap.add_argument("--tag", default="")                        # suffix for ckpt/csv names (avoid clobbering)
     args = ap.parse_args()
+    THETAS = args.thetas
+    sfx = f"_{args.tag}" if args.tag else ""
 
     os.makedirs(RESULTS, exist_ok=True)
     n = len(args.gpus)
     ckpts, procs = [], []
     for i, g in enumerate(args.gpus):
-        ck = os.path.join(RESULTS, f"d5_ckpt_gpu{g}.json")
+        ck = os.path.join(RESULTS, f"d5_ckpt{sfx}_gpu{g}.json")
         ckpts.append(ck)
         cmd = [sys.executable, os.path.join(HERE, "_d5_worker.py"),
                "--gpu", str(g), "--ckpt", ck,
                "--coh-shots", str(split(args.coh_shots, n, i)),
                "--pauli-shots", str(split(args.pauli_shots, n, i)),
-               "--seed", str(1000 + g), "--max-sec", str(args.max_sec)]
+               "--seed", str(1000 + g), "--max-sec", str(args.max_sec),
+               "--thetas", *[str(t) for t in args.thetas]]
         print("launch:", " ".join(cmd), flush=True)
         procs.append(subprocess.Popen(cmd))
 
@@ -83,7 +87,7 @@ def main():
         print(f"  d= 5 theta={t:.2f}  coh={coh:.4e}+/-{se_coh:.1e}  "
               f"pauli={pau:.4e}+/-{se_pau:.1e}  ratio={ratio:.3f}+/-{se_ratio:.3f}")
 
-    out = os.path.join(RESULTS, "coherent_scaling_d5_multigpu.csv")
+    out = os.path.join(RESULTS, f"coherent_scaling_d5_multigpu{sfx}.csv")
     with open(out, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader()
         [w.writerow(r) for r in rows]
