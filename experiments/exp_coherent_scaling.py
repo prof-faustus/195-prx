@@ -56,7 +56,7 @@ def run(distances, thetas, shots_coh, shots_pauli, disk_mode="patch", seed=0):
 def main():
     print(f"backend = {_BK}")
     # d=3 runs here in seconds; d>=5 wants COHSIM_BACKEND=cupy on the GPU box.
-    distances = [3, 5] if _BK == "cupy" else [3]
+    distances = [5] if _BK == "cupy" else [3]
     thetas = [0.20, 0.30, 0.40, 0.50]
     print("\n=== whole-patch non-commuting coherent burst ===")
     rows = run(distances, thetas, shots_coh=4000, shots_pauli=120000, disk_mode="patch")

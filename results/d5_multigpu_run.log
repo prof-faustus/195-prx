@@ -1,0 +1,79 @@
+launch: J:\My Drive\Claude\Code\195 PRX\.venv\Scripts\python.exe J:\My Drive\Claude\Code\195 PRX\experiments\_d5_worker.py --gpu 0 --ckpt J:\My Drive\Claude\Code\195 PRX\experiments\..\results\d5_ckpt_gpu0.json --coh-shots 75 --pauli-shots 30000 --seed 1000 --max-sec 240.0
+launch: J:\My Drive\Claude\Code\195 PRX\.venv\Scripts\python.exe J:\My Drive\Claude\Code\195 PRX\experiments\_d5_worker.py --gpu 1 --ckpt J:\My Drive\Claude\Code\195 PRX\experiments\..\results\d5_ckpt_gpu1.json --coh-shots 75 --pauli-shots 30000 --seed 1001 --max-sec 240.0
+launch: J:\My Drive\Claude\Code\195 PRX\.venv\Scripts\python.exe J:\My Drive\Claude\Code\195 PRX\experiments\_d5_worker.py --gpu 2 --ckpt J:\My Drive\Claude\Code\195 PRX\experiments\..\results\d5_ckpt_gpu2.json --coh-shots 75 --pauli-shots 30000 --seed 1002 --max-sec 240.0
+launch: J:\My Drive\Claude\Code\195 PRX\.venv\Scripts\python.exe J:\My Drive\Claude\Code\195 PRX\experiments\_d5_worker.py --gpu 3 --ckpt J:\My Drive\Claude\Code\195 PRX\experiments\..\results\d5_ckpt_gpu3.json --coh-shots 75 --pauli-shots 30000 --seed 1003 --max-sec 240.0
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+[gpu0] theta=0.20 coherent 16/75 (+16 in 56.2s, ~0.28 sh/s)
+[gpu3] theta=0.20 coherent 16/75 (+16 in 56.9s, ~0.28 sh/s)
+[gpu2] theta=0.20 coherent 16/75 (+16 in 58.9s, ~0.27 sh/s)
+[gpu1] theta=0.20 coherent 16/75 (+16 in 60.0s, ~0.27 sh/s)
+[gpu0] theta=0.20 coherent 75/75 (+59 in 151.6s, ~0.39 sh/s)
+[gpu0] theta=0.20 pauli 20000/30000
+[gpu0] theta=0.20 pauli 30000/30000
+[gpu3] theta=0.20 coherent 75/75 (+59 in 152.7s, ~0.39 sh/s)
+[gpu3] theta=0.20 pauli 20000/30000
+[gpu3] theta=0.20 pauli 30000/30000
+[gpu2] theta=0.20 coherent 75/75 (+59 in 164.0s, ~0.36 sh/s)
+[gpu2] theta=0.20 pauli 20000/30000
+[gpu2] theta=0.20 pauli 30000/30000
+[gpu1] theta=0.20 coherent 75/75 (+59 in 166.3s, ~0.35 sh/s)
+[gpu1] theta=0.20 pauli 20000/30000
+[gpu1] theta=0.20 pauli 30000/30000
+[gpu0] theta=0.30 coherent 75/75 (+75 in 196.9s, ~0.38 sh/s)
+[gpu0] theta=0.30 pauli 20000/30000
+[gpu0] theta=0.30 pauli 30000/30000
+[gpu3] theta=0.30 coherent 75/75 (+75 in 197.2s, ~0.38 sh/s)
+[gpu3] theta=0.30 pauli 20000/30000
+[gpu3] theta=0.30 pauli 30000/30000
+[gpu2] theta=0.30 coherent 75/75 (+75 in 207.0s, ~0.36 sh/s)
+[gpu2] theta=0.30 pauli 20000/30000
+[gpu2] theta=0.30 pauli 30000/30000
+[gpu1] theta=0.30 coherent 75/75 (+75 in 211.1s, ~0.36 sh/s)
+[gpu1] theta=0.30 pauli 20000/30000
+[gpu1] theta=0.30 pauli 30000/30000
+[gpu0] theta=0.40 coherent 75/75 (+75 in 199.0s, ~0.38 sh/s)
+[gpu0] theta=0.40 pauli 20000/30000
+[gpu0] theta=0.40 pauli 30000/30000
+[gpu3] theta=0.40 coherent 75/75 (+75 in 199.6s, ~0.38 sh/s)
+[gpu3] theta=0.40 pauli 20000/30000
+[gpu3] theta=0.40 pauli 30000/30000
+[gpu2] theta=0.40 coherent 75/75 (+75 in 208.0s, ~0.36 sh/s)
+[gpu2] theta=0.40 pauli 20000/30000
+[gpu2] theta=0.40 pauli 30000/30000
+[gpu1] theta=0.40 coherent 75/75 (+75 in 217.1s, ~0.35 sh/s)
+[gpu1] theta=0.40 pauli 20000/30000
+[gpu1] theta=0.40 pauli 30000/30000
+[gpu0] theta=0.50 coherent 75/75 (+75 in 200.3s, ~0.37 sh/s)
+[gpu0] theta=0.50 pauli 20000/30000
+[gpu0] theta=0.50 pauli 30000/30000
+[gpu0] DONE
+[gpu3] theta=0.50 coherent 75/75 (+75 in 200.8s, ~0.37 sh/s)
+[gpu3] theta=0.50 pauli 20000/30000
+[gpu3] theta=0.50 pauli 30000/30000
+[gpu3] DONE
+[gpu2] theta=0.50 coherent 75/75 (+75 in 209.2s, ~0.36 sh/s)
+[gpu2] theta=0.50 pauli 20000/30000
+[gpu2] theta=0.50 pauli 30000/30000
+[gpu2] DONE
+[gpu1] theta=0.50 coherent 75/75 (+75 in 212.8s, ~0.35 sh/s)
+[gpu1] theta=0.50 pauli 20000/30000
+[gpu1] theta=0.50 pauli 30000/30000
+[gpu1] DONE
+worker exit codes: [0, 0, 0, 0]
+
+=== d=5 multi-GPU coherent vs Pauli twirl (whole patch) ===
+  (coh +/- = standard error of the soft estimator; ratio +/- = propagated)
+  d= 5 theta=0.20  coh=4.3942e-02+/-7.9e-03  pauli=1.2808e-02+/-3.2e-04  ratio=3.431+/-0.620
+  d= 5 theta=0.30  coh=2.0408e-01+/-1.7e-02  pauli=8.7967e-02+/-8.2e-04  ratio=2.320+/-0.190
+  d= 5 theta=0.40  coh=3.9409e-01+/-1.9e-02  pauli=2.4202e-01+/-1.2e-03  ratio=1.628+/-0.080
+  d= 5 theta=0.50  coh=5.1028e-01+/-1.8e-02  pauli=3.9065e-01+/-1.4e-03  ratio=1.306+/-0.046
+
+saved J:\My Drive\Claude\Code\195 PRX\experiments\..\results\coherent_scaling_d5_multigpu.csv
+EXIT=0

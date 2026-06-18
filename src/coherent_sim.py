@@ -85,6 +85,86 @@ def apply_pauli_string(psi, paulis, support, n):
     return psi
 
 
+# ----------------------------------------------- batched state-vector ops (B trajectories)
+# All ops below mutate the batched state IN PLACE (no per-op 2^n allocations) and reuse
+# caller-provided scratch, so the d=5 working set stays ~2x the state instead of ~7x.
+def _host(a):
+    """Move an xp array (numpy or cupy) to a host numpy array."""
+    return a.get() if hasattr(a, "get") else np.asarray(a)
+
+
+def _slabs(psi, i, n):
+    """Return the (|0>, |1>) half-slab views of qubit i over a batch psi (B, 2^n)."""
+    B = psi.shape[0]
+    v = psi.reshape((B, 2 ** i, 2, 2 ** (n - i - 1)))
+    return v[:, :, 0, :], v[:, :, 1, :]
+
+
+def apply_g_inplace(psi, g4, i, n, scr):
+    """Apply a general 2x2 gate g4=(g00,g01,g10,g11) to qubit i in place; scr is a half-state buffer."""
+    s0, s1 = _slabs(psi, i, n)
+    g00, g01, g10, g11 = g4
+    t = scr[:s0.size].reshape(s0.shape)
+    t[:] = s0                       # save old |0> slab
+    s0 *= g00; s0 += g01 * s1       # s0 <- g00*s0 + g01*s1
+    s1 *= g11; s1 += g10 * t        # s1 <- g10*s0_old + g11*s1
+    return psi
+
+
+def apply_x_inplace(psi, i, n, scr):
+    """Apply X to qubit i in place (swap |0>/|1> slabs); scr is a half-state buffer."""
+    s0, s1 = _slabs(psi, i, n)
+    t = scr[:s0.size].reshape(s0.shape)
+    t[:] = s0; s0[:] = s1; s1[:] = t
+    return psi
+
+
+def apply_z_inplace(psi, i, n):
+    """Apply Z to qubit i in place (negate the |1> slab)."""
+    _, s1 = _slabs(psi, i, n)
+    s1 *= -1
+    return psi
+
+
+def _real_braket(psi, phi):
+    """Re<psi|phi> per trajectory, (B,), without allocating a conjugate of the full state."""
+    return (psi.real * phi.real).sum(axis=1) + (psi.imag * phi.imag).sum(axis=1)
+
+
+def measure_collapse_inplace(psi, Spsi, kind, supp, n, scr, rng):
+    """Project the batch onto a +/-1 eigenspace of stabilizer `kind`(=X/Z) on supp, per trajectory.
+    `Spsi` is a reused full-state scratch buffer; psi is collapsed in place. Returns host bits (B,)."""
+    Spsi[:] = psi                                       # one reuse-buffer copy per measurement
+    if kind == "X":
+        for q in supp:
+            apply_x_inplace(Spsi, q, n, scr)
+    else:
+        for q in supp:
+            apply_z_inplace(Spsi, q, n)
+    e = _host(_real_braket(psi, Spsi))                  # <psi|S|psi> per trajectory
+    prob_plus = (e + 1.0) / 2.0
+    plus = rng.random(prob_plus.shape[0]) < prob_plus
+    sign = xp.asarray(np.where(plus, 1.0, -1.0))
+    Spsi *= sign[:, None]                               # +/- per trajectory, in place
+    psi += Spsi                                         # psi <- psi +/- S psi
+    nrm = xp.sqrt((psi.real ** 2).sum(axis=1) + (psi.imag ** 2).sum(axis=1))
+    psi /= nrm[:, None]
+    return (~plus).astype(np.uint8)
+
+
+def apply_correction_b(psi, gate_is_x, qubit, n, mask):
+    """Apply X (gate_is_x=True) or Z to `qubit` only on the masked trajectories (mask: xp bool (B,))."""
+    if not bool(mask.any()):
+        return psi
+    B = psi.shape[0]
+    v = psi.reshape((B, 2 ** qubit, 2, 2 ** (n - qubit - 1)))
+    if gate_is_x:
+        v[mask] = v[mask][:, :, ::-1, :]                 # X swaps the |0>/|1> slabs
+    else:
+        v[mask, :, 1, :] = -v[mask, :, 1, :]             # Z flips sign of |1> slab
+    return psi
+
+
 class CoherentSim:
     Xg = xp.array([[0, 1], [1, 0]], complex)
     Zg = xp.array([[1, 0], [0, -1]], complex)
@@ -103,6 +183,11 @@ class CoherentSim:
         self.MlX = pymatching.Matching(self.HzZ, faults_matrix=self.LZ)
         self.MlZ = pymatching.Matching(self.HxX, faults_matrix=self.LX)
         self.psi0 = self._prep_logical_zero()
+        # batch size: how many trajectories share one GPU state-vector pass.
+        # keep resident batch under COHSIM_BATCH_BYTES (default 2 GB); 1q ops need ~3x transiently.
+        budget = float(os.environ.get("COHSIM_BATCH_BYTES", 2.0e9))
+        self.B = max(1, min(512, int(budget // ((2 ** self.n) * 16))))
+        self.HzZ_i = self.HzZ.astype(np.int64)
 
     def _prep_logical_zero(self):
         n = self.n
@@ -123,42 +208,68 @@ class CoherentSim:
             out = (psi + Spsi); return out / xp.linalg.norm(out), 0
         out = (psi - Spsi); return out / xp.linalg.norm(out), 1
 
-    def coherent_LER(self, disk, tx, tz, shots, rng):
-        """Logical error rate of a coherent burst exp(-i sum (tx X_i + tz Z_i)) on `disk`."""
+    def _coherent_batch(self, g4, disk, b, rng):
+        """Run b coherent trajectories at once (in place); return soft logical-error contributions (b,)."""
+        n = self.n
+        psi = xp.tile(self.psi0, (b, 1))                  # (b, 2^n), fresh copy per batch
+        scr = xp.empty(b * 2 ** (n - 1), complex)         # one reused half-state scratch
+        Spsi = xp.empty((b, 2 ** n), complex)             # one reused full-state scratch
+        for i in disk:
+            apply_g_inplace(psi, g4, i, n, scr)
+        synX = np.zeros((b, len(self.zsupp)), np.uint8)   # Z-stabs detect X
+        for k, supp in enumerate(self.zsupp):
+            synX[:, k] = measure_collapse_inplace(psi, Spsi, "Z", supp, n, scr, rng)
+        synZ = np.zeros((b, len(self.xsupp)), np.uint8)   # X-stabs detect Z
+        for k, supp in enumerate(self.xsupp):
+            synZ[:, k] = measure_collapse_inplace(psi, Spsi, "X", supp, n, scr, rng)
+        corrX = self.McX.decode_batch(synX)               # (b, n) X-corrections
+        corrZ = self.McZ.decode_batch(synZ)               # (b, n) Z-corrections
+        for i in range(n):
+            apply_correction_b(psi, True, i, n, xp.asarray(corrX[:, i].astype(bool)))
+        for i in range(n):
+            apply_correction_b(psi, False, i, n, xp.asarray(corrZ[:, i].astype(bool)))
+        Spsi[:] = psi
+        for q in self.logZ:
+            apply_z_inplace(Spsi, q, n)
+        zl = _host(_real_braket(psi, Spsi))               # <Z_L> per trajectory
+        return (1.0 - zl) / 2.0
+
+    def _burst_gate(self, tx, tz):
+        """exp(-i phi (nx X + nz Z)) as the python-complex tuple (g00,g01,g10,g11)."""
         phi = float(np.hypot(tx, tz)); nx, nz = tx / phi, tz / phi
-        g = float(np.cos(phi)) * xp.eye(2) - 1j * float(np.sin(phi)) * (nx * self.Xg + nz * self.Zg)
-        tot = 0.0
-        for _ in range(shots):
-            psi = self.psi0.copy()
-            for i in disk:
-                psi = apply_1q(psi, g, i, self.n)
-            # full syndrome
-            synX = np.zeros(len(self.zsupp), np.uint8)        # Z-stabs detect X
-            for k, supp in enumerate(self.zsupp):
-                psi, b = self._measure_collapse(psi, self.Zg, supp, rng); synX[k] = b
-            synZ = np.zeros(len(self.xsupp), np.uint8)        # X-stabs detect Z
-            for k, supp in enumerate(self.xsupp):
-                psi, b = self._measure_collapse(psi, self.Xg, supp, rng); synZ[k] = b
-            for i in np.where(self.McX.decode(synX))[0]:
-                psi = apply_1q(psi, self.Xg, i, self.n)
-            for i in np.where(self.McZ.decode(synZ))[0]:
-                psi = apply_1q(psi, self.Zg, i, self.n)
-            tot += (1.0 - self._expect_ZL(psi)) / 2.0
-        return tot / shots
+        c, s = float(np.cos(phi)), float(np.sin(phi))
+        return (complex(c, -s * nz), complex(0.0, -s * nx),
+                complex(0.0, -s * nx), complex(c, s * nz))
+
+    def coherent_stats(self, disk, tx, tz, shots, rng):
+        """Return (sum, sumsq, n) of the per-shot soft logical-error contributions.
+        Sum/sumsq let callers form the mean and its standard error across shards."""
+        g4 = self._burst_gate(tx, tz)
+        s = 0.0; ss = 0.0; done = 0
+        while done < shots:
+            b = min(self.B, shots - done)
+            c = self._coherent_batch(g4, disk, b, rng)
+            s += float(c.sum()); ss += float((c * c).sum()); done += b
+        return s, ss, shots
+
+    def coherent_LER(self, disk, tx, tz, shots, rng):
+        """Logical error rate of a coherent burst exp(-i sum (tx X_i + tz Z_i)) on `disk`.
+        Trajectories are processed in batches of self.B on the active backend (GPU under cupy)."""
+        s, _, n = self.coherent_stats(disk, tx, tz, shots, rng)
+        return s / n
 
     def pauli_twirl_LER(self, disk, tx, tz, shots, rng):
-        """Logical error rate of the Pauli twirl of the same burst (fully incoherent)."""
+        """Logical error rate of the Pauli twirl of the same burst (fully incoherent), vectorized."""
         phi = float(np.hypot(tx, tz)); nx, nz = tx / phi, tz / phi
-        pX = np.sin(phi) ** 2 * nx * nx; pZ = np.sin(phi) ** 2 * nz * nz
-        disk = np.array(disk); n = self.n; fails = 0
-        for _ in range(shots):
-            eX = np.zeros(n, np.uint8); eZ = np.zeros(n, np.uint8)
-            eX[disk[rng.random(len(disk)) < pX]] = 1
-            eZ[disk[rng.random(len(disk)) < pZ]] = 1
-            cX = self.McX.decode(((self.HzZ @ eX) % 2).astype(np.uint8))
-            resX = (eX ^ cX) % 2
-            fails += int((self.LZ @ resX)[0] % 2)
-        return fails / shots
+        pX = np.sin(phi) ** 2 * nx * nx
+        disk = np.array(disk); n = self.n
+        eX = np.zeros((shots, n), np.uint8)
+        eX[:, disk] = (rng.random((shots, len(disk))) < pX).astype(np.uint8)
+        syn = ((self.HzZ_i @ eX.T) % 2).T.astype(np.uint8)        # (shots, n_Zstab)
+        corr = self.McX.decode_batch(syn)                          # (shots, n)
+        res = (eX ^ corr) % 2
+        fails = ((self.LZ @ res.T) % 2)[0]                         # logical-Z parity per shot
+        return int(fails.sum()) / shots
 
 
 if __name__ == "__main__":
