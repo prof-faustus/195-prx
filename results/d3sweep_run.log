@@ -1,0 +1,432 @@
+launch: J:\My Drive\Claude\Code\195 PRX\.venv\Scripts\python.exe J:\My Drive\Claude\Code\195 PRX\experiments\_d5_worker.py --gpu 0 --ckpt J:\My Drive\Claude\Code\195 PRX\experiments\..\results\d5_ckpt_d3sweep_gpu0.json --coh-shots 4000 --pauli-shots 60000 --seed 1000 --max-sec 240.0 --distance 3 --thetas 0.05 0.06 0.07 0.08 0.09 0.1 0.11 0.12 0.13 0.14 0.15 0.16 0.17 0.18 0.19 0.2 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29 0.3 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.4 0.41 0.42 0.43 0.44 0.45 0.46 0.47 0.48 0.49 0.5
+launch: J:\My Drive\Claude\Code\195 PRX\.venv\Scripts\python.exe J:\My Drive\Claude\Code\195 PRX\experiments\_d5_worker.py --gpu 1 --ckpt J:\My Drive\Claude\Code\195 PRX\experiments\..\results\d5_ckpt_d3sweep_gpu1.json --coh-shots 4000 --pauli-shots 60000 --seed 1001 --max-sec 240.0 --distance 3 --thetas 0.05 0.06 0.07 0.08 0.09 0.1 0.11 0.12 0.13 0.14 0.15 0.16 0.17 0.18 0.19 0.2 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29 0.3 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.4 0.41 0.42 0.43 0.44 0.45 0.46 0.47 0.48 0.49 0.5
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+[gpu0] theta=0.05 coherent 2048/4000 (+2048 in 0.2s, ~10924.68 sh/s)
+[gpu1] theta=0.05 coherent 2048/4000 (+2048 in 0.2s, ~9919.85 sh/s)
+[gpu0] theta=0.05 coherent 4000/4000 (+1952 in 0.1s, ~23251.86 sh/s)
+[gpu1] theta=0.05 coherent 4000/4000 (+1952 in 0.1s, ~21111.63 sh/s)
+[gpu0] theta=0.05 pauli 20000/60000
+[gpu1] theta=0.05 pauli 20000/60000
+[gpu0] theta=0.05 pauli 40000/60000
+[gpu1] theta=0.05 pauli 40000/60000
+[gpu0] theta=0.05 pauli 60000/60000
+[gpu1] theta=0.05 pauli 60000/60000
+[gpu0] theta=0.06 coherent 4000/4000 (+4000 in 0.2s, ~22450.29 sh/s)
+[gpu0] theta=0.06 pauli 20000/60000
+[gpu1] theta=0.06 coherent 4000/4000 (+4000 in 0.2s, ~20056.23 sh/s)
+[gpu0] theta=0.06 pauli 40000/60000
+[gpu1] theta=0.06 pauli 20000/60000
+[gpu0] theta=0.06 pauli 60000/60000
+[gpu1] theta=0.06 pauli 40000/60000
+[gpu1] theta=0.06 pauli 60000/60000
+[gpu0] theta=0.07 coherent 4000/4000 (+4000 in 0.2s, ~22869.30 sh/s)
+[gpu0] theta=0.07 pauli 20000/60000
+[gpu1] theta=0.07 coherent 4000/4000 (+4000 in 0.2s, ~19432.02 sh/s)
+[gpu0] theta=0.07 pauli 40000/60000
+[gpu1] theta=0.07 pauli 20000/60000
+[gpu0] theta=0.07 pauli 60000/60000
+[gpu1] theta=0.07 pauli 40000/60000
+[gpu1] theta=0.07 pauli 60000/60000
+[gpu0] theta=0.08 coherent 4000/4000 (+4000 in 0.2s, ~23144.88 sh/s)
+[gpu0] theta=0.08 pauli 20000/60000
+[gpu1] theta=0.08 coherent 4000/4000 (+4000 in 0.2s, ~21480.83 sh/s)
+[gpu0] theta=0.08 pauli 40000/60000
+[gpu1] theta=0.08 pauli 20000/60000
+[gpu0] theta=0.08 pauli 60000/60000
+[gpu1] theta=0.08 pauli 40000/60000
+[gpu1] theta=0.08 pauli 60000/60000
+[gpu0] theta=0.09 coherent 4000/4000 (+4000 in 0.2s, ~20663.86 sh/s)
+[gpu0] theta=0.09 pauli 20000/60000
+[gpu0] theta=0.09 pauli 40000/60000
+[gpu1] theta=0.09 coherent 4000/4000 (+4000 in 0.2s, ~19776.13 sh/s)
+[gpu0] theta=0.09 pauli 60000/60000
+[gpu1] theta=0.09 pauli 20000/60000
+[gpu1] theta=0.09 pauli 40000/60000
+[gpu1] theta=0.09 pauli 60000/60000
+[gpu0] theta=0.10 coherent 4000/4000 (+4000 in 0.2s, ~23060.04 sh/s)
+[gpu0] theta=0.10 pauli 20000/60000
+[gpu1] theta=0.10 coherent 4000/4000 (+4000 in 0.2s, ~20682.97 sh/s)
+[gpu0] theta=0.10 pauli 40000/60000
+[gpu1] theta=0.10 pauli 20000/60000
+[gpu0] theta=0.10 pauli 60000/60000
+[gpu1] theta=0.10 pauli 40000/60000
+[gpu1] theta=0.10 pauli 60000/60000
+[gpu0] theta=0.11 coherent 4000/4000 (+4000 in 0.2s, ~23067.84 sh/s)
+[gpu0] theta=0.11 pauli 20000/60000
+[gpu0] theta=0.11 pauli 40000/60000
+[gpu1] theta=0.11 coherent 4000/4000 (+4000 in 0.2s, ~20586.25 sh/s)
+[gpu0] theta=0.11 pauli 60000/60000
+[gpu1] theta=0.11 pauli 20000/60000
+[gpu1] theta=0.11 pauli 40000/60000
+[gpu1] theta=0.11 pauli 60000/60000
+[gpu0] theta=0.12 coherent 4000/4000 (+4000 in 0.2s, ~21257.41 sh/s)
+[gpu0] theta=0.12 pauli 20000/60000
+[gpu0] theta=0.12 pauli 40000/60000
+[gpu0] theta=0.12 pauli 60000/60000
+[gpu1] theta=0.12 coherent 4000/4000 (+4000 in 0.2s, ~18587.04 sh/s)
+[gpu1] theta=0.12 pauli 20000/60000
+[gpu1] theta=0.12 pauli 40000/60000
+[gpu1] theta=0.12 pauli 60000/60000
+[gpu0] theta=0.13 coherent 4000/4000 (+4000 in 0.2s, ~23358.46 sh/s)
+[gpu0] theta=0.13 pauli 20000/60000
+[gpu0] theta=0.13 pauli 40000/60000
+[gpu0] theta=0.13 pauli 60000/60000
+[gpu1] theta=0.13 coherent 4000/4000 (+4000 in 0.2s, ~19057.40 sh/s)
+[gpu1] theta=0.13 pauli 20000/60000
+[gpu1] theta=0.13 pauli 40000/60000
+[gpu1] theta=0.13 pauli 60000/60000
+[gpu0] theta=0.14 coherent 4000/4000 (+4000 in 0.2s, ~24047.05 sh/s)
+[gpu0] theta=0.14 pauli 20000/60000
+[gpu0] theta=0.14 pauli 40000/60000
+[gpu0] theta=0.14 pauli 60000/60000
+[gpu1] theta=0.14 coherent 4000/4000 (+4000 in 0.2s, ~21300.97 sh/s)
+[gpu1] theta=0.14 pauli 20000/60000
+[gpu1] theta=0.14 pauli 40000/60000
+[gpu1] theta=0.14 pauli 60000/60000
+[gpu0] theta=0.15 coherent 4000/4000 (+4000 in 0.2s, ~22113.87 sh/s)
+[gpu0] theta=0.15 pauli 20000/60000
+[gpu0] theta=0.15 pauli 40000/60000
+[gpu0] theta=0.15 pauli 60000/60000
+[gpu1] theta=0.15 coherent 4000/4000 (+4000 in 0.2s, ~20158.43 sh/s)
+[gpu1] theta=0.15 pauli 20000/60000
+[gpu1] theta=0.15 pauli 40000/60000
+[gpu1] theta=0.15 pauli 60000/60000
+[gpu0] theta=0.16 coherent 4000/4000 (+4000 in 0.2s, ~23159.36 sh/s)
+[gpu0] theta=0.16 pauli 20000/60000
+[gpu0] theta=0.16 pauli 40000/60000
+[gpu0] theta=0.16 pauli 60000/60000
+[gpu1] theta=0.16 coherent 4000/4000 (+4000 in 0.2s, ~20669.46 sh/s)
+[gpu1] theta=0.16 pauli 20000/60000
+[gpu1] theta=0.16 pauli 40000/60000
+[gpu1] theta=0.16 pauli 60000/60000
+[gpu0] theta=0.17 coherent 4000/4000 (+4000 in 0.2s, ~22774.27 sh/s)
+[gpu0] theta=0.17 pauli 20000/60000
+[gpu0] theta=0.17 pauli 40000/60000
+[gpu0] theta=0.17 pauli 60000/60000
+[gpu1] theta=0.17 coherent 4000/4000 (+4000 in 0.2s, ~21384.78 sh/s)
+[gpu1] theta=0.17 pauli 20000/60000
+[gpu1] theta=0.17 pauli 40000/60000
+[gpu0] theta=0.18 coherent 4000/4000 (+4000 in 0.2s, ~20682.94 sh/s)
+[gpu1] theta=0.17 pauli 60000/60000
+[gpu0] theta=0.18 pauli 20000/60000
+[gpu0] theta=0.18 pauli 40000/60000
+[gpu0] theta=0.18 pauli 60000/60000
+[gpu1] theta=0.18 coherent 4000/4000 (+4000 in 0.2s, ~21305.29 sh/s)
+[gpu1] theta=0.18 pauli 20000/60000
+[gpu0] theta=0.19 coherent 4000/4000 (+4000 in 0.2s, ~22842.06 sh/s)
+[gpu1] theta=0.18 pauli 40000/60000
+[gpu0] theta=0.19 pauli 20000/60000
+[gpu1] theta=0.18 pauli 60000/60000
+[gpu0] theta=0.19 pauli 40000/60000
+[gpu0] theta=0.19 pauli 60000/60000
+[gpu1] theta=0.19 coherent 4000/4000 (+4000 in 0.2s, ~18917.14 sh/s)
+[gpu0] theta=0.20 coherent 4000/4000 (+4000 in 0.2s, ~21548.37 sh/s)
+[gpu1] theta=0.19 pauli 20000/60000
+[gpu1] theta=0.19 pauli 40000/60000
+[gpu0] theta=0.20 pauli 20000/60000
+[gpu1] theta=0.19 pauli 60000/60000
+[gpu0] theta=0.20 pauli 40000/60000
+[gpu0] theta=0.20 pauli 60000/60000
+[gpu1] theta=0.20 coherent 4000/4000 (+4000 in 0.2s, ~20623.68 sh/s)
+[gpu1] theta=0.20 pauli 20000/60000
+[gpu1] theta=0.20 pauli 40000/60000
+[gpu0] theta=0.21 coherent 4000/4000 (+4000 in 0.2s, ~17121.08 sh/s)
+[gpu1] theta=0.20 pauli 60000/60000
+[gpu0] theta=0.21 pauli 20000/60000
+[gpu0] theta=0.21 pauli 40000/60000
+[gpu0] theta=0.21 pauli 60000/60000
+[gpu1] theta=0.21 coherent 4000/4000 (+4000 in 0.2s, ~21002.71 sh/s)
+[gpu1] theta=0.21 pauli 20000/60000
+[gpu1] theta=0.21 pauli 40000/60000
+[gpu0] theta=0.22 coherent 4000/4000 (+4000 in 0.2s, ~20316.71 sh/s)
+[gpu1] theta=0.21 pauli 60000/60000
+[gpu0] theta=0.22 pauli 20000/60000
+[gpu0] theta=0.22 pauli 40000/60000
+[gpu0] theta=0.22 pauli 60000/60000
+[gpu1] theta=0.22 coherent 4000/4000 (+4000 in 0.2s, ~19204.75 sh/s)
+[gpu1] theta=0.22 pauli 20000/60000
+[gpu1] theta=0.22 pauli 40000/60000
+[gpu1] theta=0.22 pauli 60000/60000
+[gpu0] theta=0.23 coherent 4000/4000 (+4000 in 0.2s, ~20633.34 sh/s)
+[gpu0] theta=0.23 pauli 20000/60000
+[gpu0] theta=0.23 pauli 40000/60000
+[gpu0] theta=0.23 pauli 60000/60000
+[gpu1] theta=0.23 coherent 4000/4000 (+4000 in 0.2s, ~17924.89 sh/s)
+[gpu1] theta=0.23 pauli 20000/60000
+[gpu1] theta=0.23 pauli 40000/60000
+[gpu1] theta=0.23 pauli 60000/60000
+[gpu0] theta=0.24 coherent 4000/4000 (+4000 in 0.2s, ~19110.84 sh/s)
+[gpu0] theta=0.24 pauli 20000/60000
+[gpu0] theta=0.24 pauli 40000/60000
+[gpu0] theta=0.24 pauli 60000/60000
+[gpu1] theta=0.24 coherent 4000/4000 (+4000 in 0.2s, ~21044.62 sh/s)
+[gpu1] theta=0.24 pauli 20000/60000
+[gpu1] theta=0.24 pauli 40000/60000
+[gpu1] theta=0.24 pauli 60000/60000
+[gpu0] theta=0.25 coherent 4000/4000 (+4000 in 0.2s, ~20602.68 sh/s)
+[gpu0] theta=0.25 pauli 20000/60000
+[gpu0] theta=0.25 pauli 40000/60000
+[gpu0] theta=0.25 pauli 60000/60000
+[gpu1] theta=0.25 coherent 4000/4000 (+4000 in 0.2s, ~20678.00 sh/s)
+[gpu1] theta=0.25 pauli 20000/60000
+[gpu1] theta=0.25 pauli 40000/60000
+[gpu1] theta=0.25 pauli 60000/60000
+[gpu0] theta=0.26 coherent 4000/4000 (+4000 in 0.2s, ~20788.55 sh/s)
+[gpu0] theta=0.26 pauli 20000/60000
+[gpu0] theta=0.26 pauli 40000/60000
+[gpu0] theta=0.26 pauli 60000/60000
+[gpu1] theta=0.26 coherent 4000/4000 (+4000 in 0.2s, ~18217.33 sh/s)
+[gpu1] theta=0.26 pauli 20000/60000
+[gpu1] theta=0.26 pauli 40000/60000
+[gpu0] theta=0.27 coherent 4000/4000 (+4000 in 0.2s, ~19524.01 sh/s)
+[gpu1] theta=0.26 pauli 60000/60000
+[gpu0] theta=0.27 pauli 20000/60000
+[gpu0] theta=0.27 pauli 40000/60000
+[gpu0] theta=0.27 pauli 60000/60000
+[gpu1] theta=0.27 coherent 4000/4000 (+4000 in 0.2s, ~20034.12 sh/s)
+[gpu1] theta=0.27 pauli 20000/60000
+[gpu1] theta=0.27 pauli 40000/60000
+[gpu0] theta=0.28 coherent 4000/4000 (+4000 in 0.2s, ~20467.58 sh/s)
+[gpu1] theta=0.27 pauli 60000/60000
+[gpu0] theta=0.28 pauli 20000/60000
+[gpu0] theta=0.28 pauli 40000/60000
+[gpu0] theta=0.28 pauli 60000/60000
+[gpu1] theta=0.28 coherent 4000/4000 (+4000 in 0.2s, ~19868.40 sh/s)
+[gpu1] theta=0.28 pauli 20000/60000
+[gpu1] theta=0.28 pauli 40000/60000
+[gpu0] theta=0.29 coherent 4000/4000 (+4000 in 0.2s, ~20455.25 sh/s)
+[gpu1] theta=0.28 pauli 60000/60000
+[gpu0] theta=0.29 pauli 20000/60000
+[gpu0] theta=0.29 pauli 40000/60000
+[gpu0] theta=0.29 pauli 60000/60000
+[gpu1] theta=0.29 coherent 4000/4000 (+4000 in 0.2s, ~19846.90 sh/s)
+[gpu0] theta=0.30 coherent 4000/4000 (+4000 in 0.2s, ~20806.47 sh/s)
+[gpu1] theta=0.29 pauli 20000/60000
+[gpu0] theta=0.30 pauli 20000/60000
+[gpu1] theta=0.29 pauli 40000/60000
+[gpu0] theta=0.30 pauli 40000/60000
+[gpu1] theta=0.29 pauli 60000/60000
+[gpu0] theta=0.30 pauli 60000/60000
+[gpu1] theta=0.30 coherent 4000/4000 (+4000 in 0.2s, ~20348.30 sh/s)
+[gpu1] theta=0.30 pauli 20000/60000
+[gpu0] theta=0.31 coherent 4000/4000 (+4000 in 0.2s, ~20864.23 sh/s)
+[gpu1] theta=0.30 pauli 40000/60000
+[gpu0] theta=0.31 pauli 20000/60000
+[gpu1] theta=0.30 pauli 60000/60000
+[gpu0] theta=0.31 pauli 40000/60000
+[gpu0] theta=0.31 pauli 60000/60000
+[gpu1] theta=0.31 coherent 4000/4000 (+4000 in 0.2s, ~20019.73 sh/s)
+[gpu1] theta=0.31 pauli 20000/60000
+[gpu0] theta=0.32 coherent 4000/4000 (+4000 in 0.2s, ~20132.18 sh/s)
+[gpu1] theta=0.31 pauli 40000/60000
+[gpu0] theta=0.32 pauli 20000/60000
+[gpu1] theta=0.31 pauli 60000/60000
+[gpu0] theta=0.32 pauli 40000/60000
+[gpu0] theta=0.32 pauli 60000/60000
+[gpu1] theta=0.32 coherent 4000/4000 (+4000 in 0.2s, ~19504.83 sh/s)
+[gpu0] theta=0.33 coherent 4000/4000 (+4000 in 0.2s, ~19515.27 sh/s)
+[gpu1] theta=0.32 pauli 20000/60000
+[gpu0] theta=0.33 pauli 20000/60000
+[gpu1] theta=0.32 pauli 40000/60000
+[gpu0] theta=0.33 pauli 40000/60000
+[gpu1] theta=0.32 pauli 60000/60000
+[gpu0] theta=0.33 pauli 60000/60000
+[gpu1] theta=0.33 coherent 4000/4000 (+4000 in 0.2s, ~19700.05 sh/s)
+[gpu0] theta=0.34 coherent 4000/4000 (+4000 in 0.2s, ~20454.83 sh/s)
+[gpu1] theta=0.33 pauli 20000/60000
+[gpu0] theta=0.34 pauli 20000/60000
+[gpu0] theta=0.34 pauli 40000/60000
+[gpu1] theta=0.33 pauli 40000/60000
+[gpu0] theta=0.34 pauli 60000/60000
+[gpu1] theta=0.33 pauli 60000/60000
+[gpu0] theta=0.35 coherent 4000/4000 (+4000 in 0.2s, ~19256.22 sh/s)
+[gpu1] theta=0.34 coherent 4000/4000 (+4000 in 0.2s, ~17956.26 sh/s)
+[gpu0] theta=0.35 pauli 20000/60000
+[gpu1] theta=0.34 pauli 20000/60000
+[gpu0] theta=0.35 pauli 40000/60000
+[gpu1] theta=0.34 pauli 40000/60000
+[gpu0] theta=0.35 pauli 60000/60000
+[gpu1] theta=0.34 pauli 60000/60000
+[gpu0] theta=0.36 coherent 4000/4000 (+4000 in 0.2s, ~20141.68 sh/s)
+[gpu0] theta=0.36 pauli 20000/60000
+[gpu1] theta=0.35 coherent 4000/4000 (+4000 in 0.2s, ~17918.81 sh/s)
+[gpu0] theta=0.36 pauli 40000/60000
+[gpu1] theta=0.35 pauli 20000/60000
+[gpu0] theta=0.36 pauli 60000/60000
+[gpu1] theta=0.35 pauli 40000/60000
+[gpu1] theta=0.35 pauli 60000/60000
+[gpu0] theta=0.37 coherent 4000/4000 (+4000 in 0.2s, ~20172.63 sh/s)
+[gpu0] theta=0.37 pauli 20000/60000
+[gpu1] theta=0.36 coherent 4000/4000 (+4000 in 0.2s, ~19434.31 sh/s)
+[gpu0] theta=0.37 pauli 40000/60000
+[gpu1] theta=0.36 pauli 20000/60000
+[gpu0] theta=0.37 pauli 60000/60000
+[gpu1] theta=0.36 pauli 40000/60000
+[gpu1] theta=0.36 pauli 60000/60000
+[gpu0] theta=0.38 coherent 4000/4000 (+4000 in 0.2s, ~20386.11 sh/s)
+[gpu0] theta=0.38 pauli 20000/60000
+[gpu1] theta=0.37 coherent 4000/4000 (+4000 in 0.2s, ~20201.05 sh/s)
+[gpu1] theta=0.37 pauli 20000/60000
+[gpu0] theta=0.38 pauli 40000/60000
+[gpu0] theta=0.38 pauli 60000/60000
+[gpu1] theta=0.37 pauli 40000/60000
+[gpu1] theta=0.37 pauli 60000/60000
+[gpu0] theta=0.39 coherent 4000/4000 (+4000 in 0.2s, ~18833.66 sh/s)
+[gpu1] theta=0.38 coherent 4000/4000 (+4000 in 0.2s, ~19920.66 sh/s)
+[gpu0] theta=0.39 pauli 20000/60000
+[gpu1] theta=0.38 pauli 20000/60000
+[gpu0] theta=0.39 pauli 40000/60000
+[gpu1] theta=0.38 pauli 40000/60000
+[gpu0] theta=0.39 pauli 60000/60000
+[gpu1] theta=0.38 pauli 60000/60000
+[gpu0] theta=0.40 coherent 4000/4000 (+4000 in 0.2s, ~16499.55 sh/s)
+[gpu1] theta=0.39 coherent 4000/4000 (+4000 in 0.2s, ~17135.92 sh/s)
+[gpu0] theta=0.40 pauli 20000/60000
+[gpu1] theta=0.39 pauli 20000/60000
+[gpu0] theta=0.40 pauli 40000/60000
+[gpu1] theta=0.39 pauli 40000/60000
+[gpu0] theta=0.40 pauli 60000/60000
+[gpu1] theta=0.39 pauli 60000/60000
+[gpu1] theta=0.40 coherent 4000/4000 (+4000 in 0.2s, ~19451.71 sh/s)
+[gpu0] theta=0.41 coherent 4000/4000 (+4000 in 0.2s, ~17322.19 sh/s)
+[gpu1] theta=0.40 pauli 20000/60000
+[gpu0] theta=0.41 pauli 20000/60000
+[gpu1] theta=0.40 pauli 40000/60000
+[gpu0] theta=0.41 pauli 40000/60000
+[gpu1] theta=0.40 pauli 60000/60000
+[gpu0] theta=0.41 pauli 60000/60000
+[gpu1] theta=0.41 coherent 4000/4000 (+4000 in 0.2s, ~19226.59 sh/s)
+[gpu0] theta=0.42 coherent 4000/4000 (+4000 in 0.2s, ~18732.29 sh/s)
+[gpu1] theta=0.41 pauli 20000/60000
+[gpu0] theta=0.42 pauli 20000/60000
+[gpu1] theta=0.41 pauli 40000/60000
+[gpu0] theta=0.42 pauli 40000/60000
+[gpu1] theta=0.41 pauli 60000/60000
+[gpu0] theta=0.42 pauli 60000/60000
+[gpu0] theta=0.43 coherent 4000/4000 (+4000 in 0.2s, ~19836.99 sh/s)
+[gpu1] theta=0.42 coherent 4000/4000 (+4000 in 0.2s, ~19211.86 sh/s)
+[gpu0] theta=0.43 pauli 20000/60000
+[gpu1] theta=0.42 pauli 20000/60000
+[gpu0] theta=0.43 pauli 40000/60000
+[gpu1] theta=0.42 pauli 40000/60000
+[gpu0] theta=0.43 pauli 60000/60000
+[gpu1] theta=0.42 pauli 60000/60000
+[gpu0] theta=0.44 coherent 4000/4000 (+4000 in 0.2s, ~20512.30 sh/s)
+[gpu1] theta=0.43 coherent 4000/4000 (+4000 in 0.2s, ~18552.75 sh/s)
+[gpu0] theta=0.44 pauli 20000/60000
+[gpu1] theta=0.43 pauli 20000/60000
+[gpu0] theta=0.44 pauli 40000/60000
+[gpu1] theta=0.43 pauli 40000/60000
+[gpu0] theta=0.44 pauli 60000/60000
+[gpu1] theta=0.43 pauli 60000/60000
+[gpu0] theta=0.45 coherent 4000/4000 (+4000 in 0.2s, ~19877.06 sh/s)
+[gpu0] theta=0.45 pauli 20000/60000
+[gpu1] theta=0.44 coherent 4000/4000 (+4000 in 0.2s, ~18089.01 sh/s)
+[gpu0] theta=0.45 pauli 40000/60000
+[gpu1] theta=0.44 pauli 20000/60000
+[gpu1] theta=0.44 pauli 40000/60000
+[gpu0] theta=0.45 pauli 60000/60000
+[gpu1] theta=0.44 pauli 60000/60000
+[gpu0] theta=0.46 coherent 4000/4000 (+4000 in 0.2s, ~20710.95 sh/s)
+[gpu0] theta=0.46 pauli 20000/60000
+[gpu1] theta=0.45 coherent 4000/4000 (+4000 in 0.2s, ~17918.19 sh/s)
+[gpu0] theta=0.46 pauli 40000/60000
+[gpu1] theta=0.45 pauli 20000/60000
+[gpu0] theta=0.46 pauli 60000/60000
+[gpu1] theta=0.45 pauli 40000/60000
+[gpu1] theta=0.45 pauli 60000/60000
+[gpu0] theta=0.47 coherent 4000/4000 (+4000 in 0.2s, ~19606.54 sh/s)
+[gpu0] theta=0.47 pauli 20000/60000
+[gpu0] theta=0.47 pauli 40000/60000
+[gpu1] theta=0.46 coherent 4000/4000 (+4000 in 0.2s, ~19028.43 sh/s)
+[gpu0] theta=0.47 pauli 60000/60000
+[gpu1] theta=0.46 pauli 20000/60000
+[gpu1] theta=0.46 pauli 40000/60000
+[gpu1] theta=0.46 pauli 60000/60000
+[gpu0] theta=0.48 coherent 4000/4000 (+4000 in 0.2s, ~21276.84 sh/s)
+[gpu0] theta=0.48 pauli 20000/60000
+[gpu0] theta=0.48 pauli 40000/60000
+[gpu1] theta=0.47 coherent 4000/4000 (+4000 in 0.2s, ~19100.81 sh/s)
+[gpu0] theta=0.48 pauli 60000/60000
+[gpu1] theta=0.47 pauli 20000/60000
+[gpu1] theta=0.47 pauli 40000/60000
+[gpu1] theta=0.47 pauli 60000/60000
+[gpu0] theta=0.49 coherent 4000/4000 (+4000 in 0.2s, ~20098.49 sh/s)
+[gpu0] theta=0.49 pauli 20000/60000
+[gpu0] theta=0.49 pauli 40000/60000
+[gpu1] theta=0.48 coherent 4000/4000 (+4000 in 0.2s, ~18356.76 sh/s)
+[gpu0] theta=0.49 pauli 60000/60000
+[gpu1] theta=0.48 pauli 20000/60000
+[gpu1] theta=0.48 pauli 40000/60000
+[gpu1] theta=0.48 pauli 60000/60000
+[gpu0] theta=0.50 coherent 4000/4000 (+4000 in 0.2s, ~18792.25 sh/s)
+[gpu0] theta=0.50 pauli 20000/60000
+[gpu0] theta=0.50 pauli 40000/60000
+[gpu1] theta=0.49 coherent 4000/4000 (+4000 in 0.2s, ~17705.07 sh/s)
+[gpu0] theta=0.50 pauli 60000/60000
+[gpu1] theta=0.49 pauli 20000/60000
+[gpu0] DONE
+[gpu1] theta=0.49 pauli 40000/60000
+[gpu1] theta=0.49 pauli 60000/60000
+[gpu1] theta=0.50 coherent 4000/4000 (+4000 in 0.2s, ~18300.45 sh/s)
+[gpu1] theta=0.50 pauli 20000/60000
+[gpu1] theta=0.50 pauli 40000/60000
+[gpu1] theta=0.50 pauli 60000/60000
+[gpu1] DONE
+worker exit codes: [0, 0]
+
+=== d=5 multi-GPU coherent vs Pauli twirl (whole patch) ===
+  (coh +/- = standard error of the soft estimator; ratio +/- = propagated)
+  d= 3 theta=0.05  coh=3.2796e-04+/-2.7e-05  pauli=1.6667e-04+/-3.7e-05  ratio=1.968+/-0.469
+  d= 3 theta=0.06  coh=5.6280e-04+/-4.1e-05  pauli=3.3333e-04+/-5.3e-05  ratio=1.688+/-0.294
+  d= 3 theta=0.07  coh=1.1619e-03+/-7.3e-05  pauli=5.1667e-04+/-6.6e-05  ratio=2.249+/-0.318
+  d= 3 theta=0.08  coh=2.1709e-03+/-1.3e-04  pauli=6.7500e-04+/-7.5e-05  ratio=3.216+/-0.403
+  d= 3 theta=0.09  coh=2.9379e-03+/-1.4e-04  pauli=1.0167e-03+/-9.2e-05  ratio=2.890+/-0.297
+  d= 3 theta=0.10  coh=4.5363e-03+/-1.9e-04  pauli=1.6583e-03+/-1.2e-04  ratio=2.735+/-0.224
+  d= 3 theta=0.11  coh=6.3578e-03+/-2.4e-04  pauli=2.4417e-03+/-1.4e-04  ratio=2.604+/-0.182
+  d= 3 theta=0.12  coh=8.8434e-03+/-3.3e-04  pauli=3.3917e-03+/-1.7e-04  ratio=2.607+/-0.161
+  d= 3 theta=0.13  coh=1.2562e-02+/-4.2e-04  pauli=4.6833e-03+/-2.0e-04  ratio=2.682+/-0.144
+  d= 3 theta=0.14  coh=1.5960e-02+/-5.0e-04  pauli=6.2083e-03+/-2.3e-04  ratio=2.571+/-0.124
+  d= 3 theta=0.15  coh=2.1331e-02+/-6.2e-04  pauli=8.7333e-03+/-2.7e-04  ratio=2.442+/-0.104
+  d= 3 theta=0.16  coh=2.7246e-02+/-7.1e-04  pauli=9.9833e-03+/-2.9e-04  ratio=2.729+/-0.106
+  d= 3 theta=0.17  coh=3.3958e-02+/-8.4e-04  pauli=1.3417e-02+/-3.3e-04  ratio=2.531+/-0.088
+  d= 3 theta=0.18  coh=4.1268e-02+/-9.6e-04  pauli=1.6175e-02+/-3.6e-04  ratio=2.551+/-0.083
+  d= 3 theta=0.19  coh=4.8876e-02+/-1.1e-03  pauli=1.9608e-02+/-4.0e-04  ratio=2.493+/-0.075
+  d= 3 theta=0.20  coh=5.8444e-02+/-1.2e-03  pauli=2.3208e-02+/-4.3e-04  ratio=2.518+/-0.071
+  d= 3 theta=0.21  coh=6.6109e-02+/-1.3e-03  pauli=2.7683e-02+/-4.7e-04  ratio=2.388+/-0.063
+  d= 3 theta=0.22  coh=8.0277e-02+/-1.5e-03  pauli=3.3583e-02+/-5.2e-04  ratio=2.390+/-0.058
+  d= 3 theta=0.23  coh=9.5394e-02+/-1.7e-03  pauli=3.9092e-02+/-5.6e-04  ratio=2.440+/-0.056
+  d= 3 theta=0.24  coh=1.0871e-01+/-1.8e-03  pauli=4.4058e-02+/-5.9e-04  ratio=2.467+/-0.053
+  d= 3 theta=0.25  coh=1.2003e-01+/-1.9e-03  pauli=5.0867e-02+/-6.3e-04  ratio=2.360+/-0.048
+  d= 3 theta=0.26  coh=1.3372e-01+/-2.1e-03  pauli=5.6958e-02+/-6.7e-04  ratio=2.348+/-0.046
+  d= 3 theta=0.27  coh=1.4708e-01+/-2.1e-03  pauli=6.4733e-02+/-7.1e-04  ratio=2.272+/-0.041
+  d= 3 theta=0.28  coh=1.6587e-01+/-2.3e-03  pauli=7.5300e-02+/-7.6e-04  ratio=2.203+/-0.038
+  d= 3 theta=0.29  coh=1.8252e-01+/-2.4e-03  pauli=8.3792e-02+/-8.0e-04  ratio=2.178+/-0.036
+  d= 3 theta=0.30  coh=2.0520e-01+/-2.6e-03  pauli=9.1900e-02+/-8.3e-04  ratio=2.233+/-0.035
+  d= 3 theta=0.31  coh=2.1574e-01+/-2.6e-03  pauli=1.0097e-01+/-8.7e-04  ratio=2.137+/-0.032
+  d= 3 theta=0.32  coh=2.3696e-01+/-2.7e-03  pauli=1.1117e-01+/-9.1e-04  ratio=2.131+/-0.030
+  d= 3 theta=0.33  coh=2.5612e-01+/-2.8e-03  pauli=1.2331e-01+/-9.5e-04  ratio=2.077+/-0.028
+  d= 3 theta=0.34  coh=2.6682e-01+/-2.8e-03  pauli=1.3333e-01+/-9.8e-04  ratio=2.001+/-0.026
+  d= 3 theta=0.35  coh=2.8992e-01+/-2.9e-03  pauli=1.4500e-01+/-1.0e-03  ratio=1.999+/-0.025
+  d= 3 theta=0.36  coh=3.1202e-01+/-3.1e-03  pauli=1.5716e-01+/-1.1e-03  ratio=1.985+/-0.024
+  d= 3 theta=0.37  coh=3.2475e-01+/-3.0e-03  pauli=1.6658e-01+/-1.1e-03  ratio=1.949+/-0.022
+  d= 3 theta=0.38  coh=3.4457e-01+/-3.1e-03  pauli=1.8047e-01+/-1.1e-03  ratio=1.909+/-0.021
+  d= 3 theta=0.39  coh=3.6064e-01+/-3.1e-03  pauli=1.9095e-01+/-1.1e-03  ratio=1.889+/-0.020
+  d= 3 theta=0.40  coh=3.7319e-01+/-3.1e-03  pauli=2.0610e-01+/-1.2e-03  ratio=1.811+/-0.018
+  d= 3 theta=0.41  coh=3.9009e-01+/-3.1e-03  pauli=2.1819e-01+/-1.2e-03  ratio=1.788+/-0.017
+  d= 3 theta=0.42  coh=4.0498e-01+/-3.1e-03  pauli=2.3108e-01+/-1.2e-03  ratio=1.753+/-0.016
+  d= 3 theta=0.43  coh=4.2342e-01+/-3.2e-03  pauli=2.4098e-01+/-1.2e-03  ratio=1.757+/-0.016
+  d= 3 theta=0.44  coh=4.3391e-01+/-3.2e-03  pauli=2.5626e-01+/-1.3e-03  ratio=1.693+/-0.015
+  d= 3 theta=0.45  coh=4.4635e-01+/-3.2e-03  pauli=2.6759e-01+/-1.3e-03  ratio=1.668+/-0.014
+  d= 3 theta=0.46  coh=4.5756e-01+/-3.1e-03  pauli=2.8025e-01+/-1.3e-03  ratio=1.633+/-0.014
+  d= 3 theta=0.47  coh=4.6947e-01+/-3.2e-03  pauli=2.9241e-01+/-1.3e-03  ratio=1.606+/-0.013
+  d= 3 theta=0.48  coh=4.7560e-01+/-3.2e-03  pauli=3.0085e-01+/-1.3e-03  ratio=1.581+/-0.013
+  d= 3 theta=0.49  coh=4.8552e-01+/-3.2e-03  pauli=3.1817e-01+/-1.3e-03  ratio=1.526+/-0.012
+  d= 3 theta=0.50  coh=4.9189e-01+/-3.2e-03  pauli=3.2698e-01+/-1.4e-03  ratio=1.504+/-0.011
+
+saved J:\My Drive\Claude\Code\195 PRX\experiments\..\results\coherent_scaling_d5_multigpu_d3sweep.csv
+saved J:\My Drive\Claude\Code\195 PRX\experiments\..\results\fig_d3_ratio_theta_d3sweep.png
+EXIT=0

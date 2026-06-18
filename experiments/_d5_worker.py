@@ -27,6 +27,7 @@ def main():
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--max-sec", type=float, default=240.0)      # target wall-time per saved section
     ap.add_argument("--thetas", type=float, nargs="+", default=[0.20, 0.30, 0.40, 0.50])
+    ap.add_argument("--distance", type=int, default=5)           # code distance d
     args = ap.parse_args()
 
     # pin to one physical GPU BEFORE importing cupy/coherent_sim
@@ -38,7 +39,7 @@ def main():
 
     thetas = args.thetas
     rng = np.random.default_rng(args.seed)
-    S = CoherentSim(5)
+    S = CoherentSim(args.distance)
     disk = list(range(S.n))
 
     state = json.load(open(args.ckpt)) if os.path.exists(args.ckpt) else {}

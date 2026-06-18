@@ -31,6 +31,8 @@ def main():
     ap.add_argument("--max-sec", type=float, default=240.0)
     ap.add_argument("--thetas", type=float, nargs="+", default=[0.20, 0.30, 0.40, 0.50])
     ap.add_argument("--tag", default="")                        # suffix for ckpt/csv names (avoid clobbering)
+    ap.add_argument("--distance", type=int, default=5)          # code distance d
+    ap.add_argument("--plot", action="store_true")              # also write a ratio(theta) png
     args = ap.parse_args()
     THETAS = args.thetas
     sfx = f"_{args.tag}" if args.tag else ""
@@ -46,6 +48,7 @@ def main():
                "--coh-shots", str(split(args.coh_shots, n, i)),
                "--pauli-shots", str(split(args.pauli_shots, n, i)),
                "--seed", str(1000 + g), "--max-sec", str(args.max_sec),
+               "--distance", str(args.distance),
                "--thetas", *[str(t) for t in args.thetas]]
         print("launch:", " ".join(cmd), flush=True)
         procs.append(subprocess.Popen(cmd))
@@ -81,10 +84,10 @@ def main():
         ratio = coh / pau if pau else float("nan")
         se_ratio = (ratio * math.sqrt((se_coh / coh) ** 2 + (se_pau / pau) ** 2)
                     if (pau and coh) else float("nan"))
-        rows.append(dict(d=5, theta=t, coh_shots=int(nc), pauli_shots=int(npa),
+        rows.append(dict(d=args.distance, theta=t, coh_shots=int(nc), pauli_shots=int(npa),
                          coherent_LER=coh, coherent_SE=se_coh,
                          pauli_LER=pau, pauli_SE=se_pau, ratio=ratio, ratio_SE=se_ratio))
-        print(f"  d= 5 theta={t:.2f}  coh={coh:.4e}+/-{se_coh:.1e}  "
+        print(f"  d={args.distance:2d} theta={t:.2f}  coh={coh:.4e}+/-{se_coh:.1e}  "
               f"pauli={pau:.4e}+/-{se_pau:.1e}  ratio={ratio:.3f}+/-{se_ratio:.3f}")
 
     out = os.path.join(RESULTS, f"coherent_scaling_d5_multigpu{sfx}.csv")
@@ -92,6 +95,26 @@ def main():
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys())); w.writeheader()
         [w.writerow(r) for r in rows]
     print(f"\nsaved {out}", flush=True)
+
+    if args.plot:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        rows.sort(key=lambda r: r["theta"])
+        th = [r["theta"] for r in rows]
+        rt = [r["ratio"] for r in rows]
+        er = [r["ratio_SE"] for r in rows]
+        plt.figure(figsize=(6.4, 4.4))
+        plt.errorbar(th, rt, yerr=er, fmt="o-", ms=3, lw=1, capsize=2,
+                     label=f"d={args.distance}  ratio(θ) ± SE")
+        plt.axhline(1.0, color="k", lw=0.8, ls="--", alpha=0.6, label="ratio = 1")
+        plt.xlabel("burst rotation angle θ (per qubit, $t_x=t_z=θ$)")
+        plt.ylabel("LER ratio  coherent / Pauli-twirl")
+        plt.title(f"d={args.distance} coherent excess vs burst angle (separable MWPM)")
+        plt.grid(True, alpha=0.3); plt.legend(); plt.tight_layout()
+        png = os.path.join(RESULTS, f"fig_d{args.distance}_ratio_theta{sfx}.png")
+        plt.savefig(png, dpi=140)
+        print(f"saved {png}", flush=True)
 
 
 if __name__ == "__main__":
