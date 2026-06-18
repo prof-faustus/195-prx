@@ -33,6 +33,7 @@ def main():
     ap.add_argument("--tag", default="")                        # suffix for ckpt/csv names (avoid clobbering)
     ap.add_argument("--distance", type=int, default=5)          # code distance d
     ap.add_argument("--plot", action="store_true")              # also write a ratio(theta) png
+    ap.add_argument("--overlay", default="")                    # another sweep CSV to overlay on the plot
     args = ap.parse_args()
     THETAS = args.thetas
     sfx = f"_{args.tag}" if args.tag else ""
@@ -105,6 +106,12 @@ def main():
         rt = [r["ratio"] for r in rows]
         er = [r["ratio_SE"] for r in rows]
         plt.figure(figsize=(6.4, 4.4))
+        if args.overlay and os.path.exists(args.overlay):
+            o = sorted(csv.DictReader(open(args.overlay)), key=lambda r: float(r["theta"]))
+            od = o[0].get("d", "?")
+            plt.errorbar([float(r["theta"]) for r in o], [float(r["ratio"]) for r in o],
+                         yerr=[float(r["ratio_SE"]) for r in o], fmt="s--", ms=3, lw=1,
+                         capsize=2, alpha=0.7, label=f"d={od}  ratio(θ) ± SE")
         plt.errorbar(th, rt, yerr=er, fmt="o-", ms=3, lw=1, capsize=2,
                      label=f"d={args.distance}  ratio(θ) ± SE")
         plt.axhline(1.0, color="k", lw=0.8, ls="--", alpha=0.6, label="ratio = 1")

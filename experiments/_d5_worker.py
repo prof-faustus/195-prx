@@ -45,6 +45,19 @@ def main():
     state = json.load(open(args.ckpt)) if os.path.exists(args.ckpt) else {}
     state.setdefault("_meta", {"gpu": args.gpu, "done": False})
 
+    # statistically clean resume: restore the exact RNG stream if the checkpoint has it
+    rs = state["_meta"].get("rng_state")
+    if rs is not None:
+        try:
+            rng.bit_generator.state = rs
+            print(f"[gpu{args.gpu}] restored RNG state from checkpoint (clean resume)", flush=True)
+        except (ValueError, KeyError, TypeError):
+            print(f"[gpu{args.gpu}] WARNING: could not restore RNG state; continuing from seed", flush=True)
+
+    def checkpoint():
+        state["_meta"]["rng_state"] = rng.bit_generator.state   # PCG64 state is JSON-serializable
+        save_atomic(args.ckpt, state)
+
     rate = None  # coherent shots/sec estimate, refined as we go
     for t in thetas:
         key = f"{t:.2f}"
@@ -64,7 +77,7 @@ def main():
             st["coh_sum"] += s
             st["coh_sumsq"] += ss
             st["coh_n"] += chunk
-            save_atomic(args.ckpt, state)
+            checkpoint()
             rate = chunk / dt
             print(f"[gpu{args.gpu}] theta={key} coherent {st['coh_n']}/{args.coh_shots} "
                   f"(+{chunk} in {dt:.1f}s, ~{rate:.2f} sh/s)", flush=True)
@@ -76,7 +89,7 @@ def main():
             m = S.pauli_twirl_LER(disk, t, t, chunk, rng)
             st["pauli_fails"] += int(round(float(m) * chunk))
             st["pauli_n"] += chunk
-            save_atomic(args.ckpt, state)
+            checkpoint()
             print(f"[gpu{args.gpu}] theta={key} pauli {st['pauli_n']}/{args.pauli_shots}", flush=True)
 
     state["_meta"]["done"] = True
