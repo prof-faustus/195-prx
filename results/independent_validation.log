@@ -1,0 +1,25 @@
+Rotated surface-code memory, independent circuit-level depolarizing noise.
+
+# physical error rate p = 0.001
+  d= 3   p_L(per 3-round shot) = 7.65000e-04 +/- 6.2e-05
+  d= 5   p_L(per 5-round shot) = 1.30000e-04 +/- 2.5e-05
+  d= 7   p_L(per 7-round shot) = 3.50000e-05 +/- 1.3e-05
+  d= 9   p_L(per 9-round shot) = 5.00000e-06 +/- 5.0e-06
+  d=11   p_L(per 11-round shot) = 0.00000e+00 +/- 2.2e-09
+  Lambda(d)=p_L(d)/p_L(d+2):  3->5: 5.88   5->7: 3.71   7->9: 7.00   9->11: inf   
+
+# physical error rate p = 0.003
+  d= 3   p_L(per 3-round shot) = 6.92500e-03 +/- 1.9e-04
+  d= 5   p_L(per 5-round shot) = 3.06000e-03 +/- 1.2e-04
+  d= 7   p_L(per 7-round shot) = 1.52000e-03 +/- 8.7e-05
+  d= 9   p_L(per 9-round shot) = 6.00000e-04 +/- 5.5e-05
+  d=11   p_L(per 11-round shot) = 2.70000e-04 +/- 3.7e-05
+  Lambda(d)=p_L(d)/p_L(d+2):  3->5: 2.26   5->7: 2.01   7->9: 2.53   9->11: 2.22   
+
+# physical error rate p = 0.005
+  d= 3   p_L(per 3-round shot) = 1.70400e-02 +/- 2.9e-04
+  d= 5   p_L(per 5-round shot) = 1.43600e-02 +/- 2.7e-04
+  d= 7   p_L(per 7-round shot) = 9.92500e-03 +/- 2.2e-04
+  d= 9   p_L(per 9-round shot) = 6.81500e-03 +/- 1.8e-04
+  d=11   p_L(per 11-round shot) = 4.28000e-03 +/- 1.5e-04
+  Lambda(d)=p_L(d)/p_L(d+2):  3->5: 1.19   5->7: 1.45   7->9: 1.46   9->11: 1.59   

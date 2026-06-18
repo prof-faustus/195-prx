@@ -1,0 +1,24 @@
+building codes (deterministic-injection extraction)...
+  d=3: data=9, X-stabs=4
+  d=5: data=25, X-stabs=12
+  d=7: data=49, X-stabs=24
+  d=9: data=81, X-stabs=40
+  d=11: data=121, X-stabs=60
+  d=13: data=169, X-stabs=84
+  d=15: data=225, X-stabs=112
+
+measuring...
+  d= 3  p_local=1.750e-05  q=0.0072  b_fixed=3.332e-01  b_span=1.642e-01  pL_fixed=2.408e-03  pL_span=1.195e-03
+  d= 5  p_local=0.000e+00  q=0.0198  b_fixed=4.291e-02  b_span=1.496e-01  pL_fixed=8.496e-04  pL_span=2.962e-03
+  d= 7  p_local=0.000e+00  q=0.0384  b_fixed=6.917e-04  b_span=1.266e-01  pL_fixed=2.659e-05  pL_span=4.868e-03
+  d= 9  p_local=0.000e+00  q=0.0627  b_fixed=0.000e+00  b_span=1.090e-01  pL_fixed=0.000e+00  pL_span=6.836e-03
+  d=11  p_local=0.000e+00  q=0.0923  b_fixed=0.000e+00  b_span=9.669e-02  pL_fixed=0.000e+00  pL_span=8.921e-03
+  d=13  p_local=0.000e+00  q=0.1265  b_fixed=0.000e+00  b_span=8.612e-02  pL_fixed=0.000e+00  pL_span=1.089e-02
+  d=15  p_local=0.000e+00  q=0.1647  b_fixed=0.000e+00  b_span=7.793e-02  pL_fixed=0.000e+00  pL_span=1.284e-02
+
+Lambda(d):
+  local-only : ['nan', 'nan', 'nan', 'nan', 'nan', 'nan']
+  fixed burst: ['2.83', '31.95', 'nan', 'nan', 'nan', 'nan']
+  span  burst: ['0.40', '0.61', '0.71', '0.77', '0.82', '0.85']
+
+saved surface_burst_results.csv, fig_bd.png, fig_pL.png

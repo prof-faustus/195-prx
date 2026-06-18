@@ -1,0 +1,9 @@
+J:\My Drive\Claude\Code\195 PRX\.venv\Lib\site-packages\cupy\_environment.py:284: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+backend = cupy
+
+=== whole-patch non-commuting coherent burst ===
+  d= 3 n=  9 theta=0.20 |disk|=  9  coh=5.6569e-02  pauli=2.2367e-02  ratio=2.529
+  d= 3 n=  9 theta=0.30 |disk|=  9  coh=2.0472e-01  pauli=9.1650e-02  ratio=2.234
+  d= 3 n=  9 theta=0.40 |disk|=  9  coh=3.7684e-01  pauli=2.0453e-01  ratio=1.843
+  d= 3 n=  9 theta=0.50 |disk|=  9  coh=4.9575e-01  pauli=3.2629e-01  ratio=1.519
